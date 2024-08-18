@@ -2,7 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_restful import Api
 from flask_cors import CORS
-
+from resources.auth import Register, Login
 import os
 from models.db import db
 
@@ -30,6 +30,9 @@ migrate = Migrate(app, db)
 with app.app_context():
     db.create_all()
 
+
+api.add_resource(Register, '/auth/register')
+api.add_resource(Login, '/auth/login')
 
 if __name__ == "__main__":
     app.run(debug=True)
