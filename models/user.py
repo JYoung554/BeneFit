@@ -11,6 +11,7 @@ class User(db.Model):
     bio = db.Column(db.String(255), nullable=True)
     avatar_url = db.Column(db.String(255), nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    plans = db.relationship(cascade='all', backref=db.backref('Plans', lazy=True))
 
 
     def __init__(self, username, first_name, email, password_digest, bio, avatar_url):

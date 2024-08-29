@@ -10,13 +10,15 @@ class Plans(Resource):
         plan = Plan(**data)
         plan.create()
         return plan.json(), 201
-    
+
+
     def get(self):
         plans = Plan.find_all()
         return [data.json() for data in plans]
 
+
 class SinglePlans(Resource):
     def get(self, plan_id):
-        plans = Plan.query.options(joinedload("plans")).filter_by(id=plan_id).first()
-        plan = [p.json() for p in plans.p]
-        return {**plan.json(), "plans":plan}
+        plan = Plan.query.options(joinedload("workouts")).filter_by(id=plan_id).first()
+        workout = [w.json() for w in plan.workout]
+        return {**plan.json(), "workouts":workout}

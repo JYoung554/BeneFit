@@ -2,7 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_restful import Api
 from flask_cors import CORS
-from resources.auth import Register, Login
+from resources.auth import Register, Login, GetProfile
 import os
 from models.db import db
 
@@ -33,6 +33,7 @@ with app.app_context():
 
 api.add_resource(Register, '/auth/register')
 api.add_resource(Login, '/auth/login')
+api.add_resource(GetProfile, 'auth/feed/:<user_id>')
 
 
 if __name__ == "__main__":
