@@ -10,13 +10,13 @@ class Register(Resource):
     def post(self):
         data = request.get_json()
         params = {
-                  "username": data['username'],
-                  "first_name":data['first_name'],
-                  "email":data['email'],
-                  "password_digest": genPassword(data['password_digest']),
-                  "bio":data['bio'],
-                  'avatar_url':data['avatar_url']
-                  }
+            "username": data['username'],
+            "first_name":data['first_name'],
+            "email":data['email'],
+            "password_digest": genPassword(data['password_digest']),
+            "bio":data['bio'],
+            'avatar_url':data['avatar_url']
+            }
         user = User(**params)
         user.create()
         return user.json(), 201
@@ -42,3 +42,9 @@ class Login(Resource):
             return payload
         return {"msg: Unauthorized", 401}
             
+
+class GetProfile(Resource):
+    def get(self, user_id):
+        user = User.query.options(joinedload('plans')).filter_by(id=user_id).first()
+        plan = [p.json() for p in user.plans]
+        return {**user.json, 'plans':plan}
