@@ -13,7 +13,8 @@ const iState = {
     username: '',
     password: ''
   },
-  setAuthenticated: true
+  authenticated: false,
+  currentUser: null
 }
 
 const AuthReducer = (state = iState, action) => {
@@ -28,6 +29,8 @@ const AuthReducer = (state = iState, action) => {
       }
     case LOGIN:
       return { ...state, loginForm: action.payload }
+    case CHECK_SESSION:
+      return { ...state, currentUser: action.payload }
     default:
       return state
   }

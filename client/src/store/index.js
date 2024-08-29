@@ -5,7 +5,7 @@ import AuthReducer from '../store/reducers/AuthReducer'
 
 const store = legacy_createStore(
   combineReducers({
-    authReducer: AuthReducer()
+    authState: AuthReducer()
   }),
   composeWithDevTools(applyMiddleware(thunk))
 )

@@ -34,5 +34,6 @@ with app.app_context():
 api.add_resource(Register, '/auth/register')
 api.add_resource(Login, '/auth/login')
 
+
 if __name__ == "__main__":
     app.run(debug=True)
