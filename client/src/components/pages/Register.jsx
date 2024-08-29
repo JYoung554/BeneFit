@@ -1,7 +1,11 @@
 import { React } from 'react'
 import { connect } from 'react-redux'
 import RegisterForm from '../forms/RegisterForm'
-import { SetAuthenticated } from '../../store/actions/AuthActions'
+import {
+  SetAuthenticated,
+  createUser,
+  addUser
+} from '../../store/actions/AuthActions'
 
 const mapStateToProps = ({ authState }) => {
   return { authState }
