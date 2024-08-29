@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Register from './components/pages/Register'
 import Login from './components/pages/Login'
 import { AuthReducer } from './store/reducers'
-import { SetAuthenticated } from './store/actions/AuthActions'
+import { SetAuthenticated, verifySession } from './store/actions/AuthActions'
 
 const mapStateToProps = async ({ authState }) => {
   return { authState }
@@ -12,21 +12,24 @@ const mapStateToProps = async ({ authState }) => {
 
 const mapDispatchToProps = async (dispatch) => {
   return {
-    SetAuthenticated: (value) => dispatch(SetAuthenticated(value))
+    SetAuthenticated: (value) => dispatch(SetAuthenticated(value)),
+    verified: (token) => dispatch(verifySession(token))
   }
 }
 
 const App = (props) => {
-  const checkToken = async () => {
-    const token = localStorage.getToken()
+  const checkToken = () => {
+    const token = localStorage.getToken('token')
     if (token) {
+      props.verified(token)
       props.authState.authenticated(true)
     }
   }
 
   useEffect(() => {
     checkToken()
-    if (props.SetAuthenticated) {
+    if (props.authState.authenticated) {
+      console.log('Hi')
     }
   }, [])
 
