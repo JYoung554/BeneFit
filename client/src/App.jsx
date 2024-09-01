@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import connect from 'react-redux'
+import { connect } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 import Register from './components/pages/Register'
+import Feed from './components/pages/Feed'
 import Login from './components/pages/Login'
 import { AuthReducer } from './store/reducers'
 import { SetAuthenticated, verifySession } from './store/actions/AuthActions'
@@ -38,6 +39,7 @@ const App = (props) => {
       <Routes>
         <Route element={<Register />} path="/register"></Route>
         <Route element={<Login />} path="/login"></Route>
+        <Route element={<Feed />} path="/feed"></Route>
       </Routes>
     </div>
   )

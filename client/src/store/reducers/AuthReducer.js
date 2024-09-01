@@ -1,4 +1,11 @@
-const { REGISTER, LOGIN, SET_USER, SET_AUTHENTICATED } = require('../types')
+const {
+  REGISTER,
+  SET_REGISTER,
+  LOGIN,
+  SET_LOGIN,
+  SET_USER,
+  SET_AUTHENTICATED
+} = require('../types')
 
 const iState = {
   registerForm: {
@@ -14,12 +21,13 @@ const iState = {
     password: ''
   },
   authenticated: false,
-  currentUser: null
+  currentUser: null,
+  userData: []
 }
 
 const AuthReducer = (state = iState, action) => {
   switch (action.type) {
-    case REGISTER:
+    case SET_REGISTER:
       return {
         ...state,
         registerForm: {
@@ -27,10 +35,19 @@ const AuthReducer = (state = iState, action) => {
           [action.payload.name]: action.payload.value
         }
       }
-    case LOGIN:
+    case SET_LOGIN:
       return { ...state, loginForm: action.payload }
+    case REGISTER:
+      return { ...state }
+    case LOGIN:
+      return { ...state, currentUser: action.payload }
+    case SET_USER:
+      return { ...state, userInfo: action.payload }
     case CHECK_SESSION:
       return { ...state, currentUser: action.payload }
+    case SET_AUTHENTICATED:
+      return { ...state, authenticated: action.payload }
+
     default:
       return state
   }

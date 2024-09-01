@@ -19,6 +19,17 @@ export const Login = async (formData) => {
   }
 }
 
+
+export const GetUserById = async (id) => {
+  try {
+    const res = Client.get(`/auth/feed/${id}`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 export const Verify = async () => {
   try {
     const res = Client.get('/auth/login')

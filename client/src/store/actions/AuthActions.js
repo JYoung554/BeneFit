@@ -1,6 +1,13 @@
 import { Register, Login, Verify } from '../../services/AuthServices'
 
-import { LOGIN, SET_AUTHENTICATED, REGISTER, SET_USER } from '../types'
+import {
+  REGISTER,
+  SET_REGISTER,
+  SET_LOGIN,
+  LOGIN,
+  SET_AUTHENTICATED,
+  SET_USER
+} from '../types'
 
 export const SetAuthenticated = async (value) => ({
   type: SET_AUTHENTICATED,
@@ -20,7 +27,7 @@ export const createUser = (formData) => async (dispatch) => {
 }
 
 export const addUser = (name, value) => ({
-  type: SET_USER,
+  type: SET_REGISTER,
   payload: { name: name, value: value }
 })
 
@@ -37,7 +44,7 @@ export const createLogin = (formData) => async (dispatch) => {
 }
 
 export const addLogin = (name, value) => ({
-  type: LOGIN,
+  type: SET_LOGIN,
   payload: {
     name: name,
     value: value

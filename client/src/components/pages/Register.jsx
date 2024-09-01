@@ -1,4 +1,5 @@
 import { React } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import RegisterForm from '../forms/RegisterForm'
 import {
@@ -20,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const Register = (props) => {
+  const history = useNavigate()
   const { registerForm } = props.authState
   const registerProps = { registerForm, handleChange, handleSubmit }
 
@@ -32,6 +34,7 @@ const Register = (props) => {
     if (registerForm.password === registerForm.comparePassword) {
       createUser(registerForm)
       addUser('', '')
+      history('/login')
     } else {
       console.log('Passwords do not match')
     }
